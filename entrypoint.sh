@@ -54,7 +54,7 @@ fi
 if ! flyctl status --app "$app"; then
   # Backup the original config file since 'flyctl launch' messes up the [build.args] section
   cp "$config" "$config.bak"
-  flyctl launch --no-deploy --remote-only --copy-config --name "$app" --image "$image" --region "$region" --org "$org" ${build_args} ${build_secrets} $INPUT_LAUNCH_OPTIONS
+  flyctl launch --no-deploy --no-db --remote-only --copy-config --name "$app" --image "$image" --region "$region" --org "$org" ${build_args} ${build_secrets} $INPUT_LAUNCH_OPTIONS
   flyctl apps create "$app" --org "$org" --verbose
   # Restore the original config file
   cp "$config.bak" "$config"
